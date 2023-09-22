@@ -1,0 +1,43 @@
+package service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dao.memberDAO;
+import dao.memberDAOImpl;
+import domain.memberVO;
+
+public class memberServiceImpl implements memberService 
+{
+	private static final Logger log=LoggerFactory.getLogger(memberServiceImpl.class);
+	
+	private memberDAO mdao;
+	
+	public memberServiceImpl()
+	{
+		mdao=new memberDAOImpl();
+	}
+
+	@Override
+	public int join(memberVO mvo) 
+	{
+		log.info("join check 2");
+		return mdao.join(mvo);
+	}
+
+	@Override
+	public memberVO login(memberVO mvo) {
+		log.info("login check 2");
+		return mdao.login(mvo);
+	}
+
+	@Override
+	public int logout(String id) {
+		log.info("logout check2");
+		return mdao.logout;
+	}
+	
+	
+	
+
+}

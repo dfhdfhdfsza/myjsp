@@ -1,0 +1,31 @@
+package dao;
+
+import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import domain.memberVO;
+import orm.DatabaseBuilder;
+
+public class memberDAOImpl implements memberDAO 
+{
+	private static final Logger log=LoggerFactory.getLogger(memberDAOImpl.class);
+	SqlSession sql;
+	private final String NS="MemberMapeer.";
+	private int isOk;
+	
+	public memberDAOImpl()
+	{
+		new DatabaseBuilder();
+		sql=DatabaseBuilder.getFactory().openSession();
+	}
+	
+	
+	@Override
+	public int join(memberVO mvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+
+}

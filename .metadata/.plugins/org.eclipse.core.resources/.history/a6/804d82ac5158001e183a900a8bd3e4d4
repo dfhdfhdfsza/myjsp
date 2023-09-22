@@ -1,0 +1,28 @@
+package service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dao.boardDAO;
+import dao.boardDAOImpl;
+import domain.boardVO;
+
+public class boardServiceImpl implements boardService 
+{
+	private static final Logger log=LoggerFactory.getLogger(boardServiceImpl.class);
+	
+	private boardDAO bdo;
+	public boardServiceImpl()
+	{
+		bdo=new boardDAOImpl();
+	}
+	
+	@Override
+	public int edit(boardVO bvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+
+}

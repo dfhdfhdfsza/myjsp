@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Board Modify Page</h1>
+	<form action="/brd/edit">
+	BNO: <input type="text" value="${bvo.bno}" name="bno" readonly="readonly"> <br>
+	TITLE: <input type="text" value="${bvo.title}" name="title"> <br>
+	WRITER: <input type="text" value="${bvo.writer}" name="writer" readonly="readonly"> <br>
+	CONTENT: <textarea rows="5" cols="30" name="content" >${bvo.content }</textarea> <br>
+	</form>
+	
+</body>
+</html>

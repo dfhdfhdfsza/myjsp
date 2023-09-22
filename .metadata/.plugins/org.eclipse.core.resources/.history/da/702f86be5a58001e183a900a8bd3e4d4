@@ -1,0 +1,14 @@
+package service;
+
+import java.util.List;
+
+import domain.boardVO;
+
+public interface boardService 
+{
+
+	int edit(boardVO bvo);
+
+	List<boardVO> list();
+
+}

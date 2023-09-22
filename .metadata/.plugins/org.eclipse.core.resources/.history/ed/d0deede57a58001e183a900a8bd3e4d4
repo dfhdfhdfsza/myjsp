@@ -1,0 +1,13 @@
+package service;
+
+import domain.memberVO;
+
+public interface memberService {
+
+	int join(memberVO mvo);
+
+	memberVO login(memberVO mvo);
+
+	int logout(String id);
+
+}

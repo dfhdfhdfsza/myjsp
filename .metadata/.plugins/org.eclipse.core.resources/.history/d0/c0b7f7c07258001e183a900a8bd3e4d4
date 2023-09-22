@@ -1,0 +1,9 @@
+package service;
+
+import domain.memberVO;
+
+public interface memberService {
+
+	int join(memberVO mvo);
+
+}

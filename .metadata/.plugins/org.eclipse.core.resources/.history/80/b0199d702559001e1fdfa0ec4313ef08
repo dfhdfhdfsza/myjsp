@@ -1,0 +1,24 @@
+package service;
+
+import java.util.List;
+
+import domain.boardVO;
+
+public interface boardService 
+{
+
+	int insert(boardVO bvo);
+
+	List<boardVO> list();
+
+	boardVO detail(int bno);
+
+	int edit(boardVO bvo);
+
+	int remove(int bno);
+
+	int totalcount();
+
+	List<boardVO> getPageList();
+
+}

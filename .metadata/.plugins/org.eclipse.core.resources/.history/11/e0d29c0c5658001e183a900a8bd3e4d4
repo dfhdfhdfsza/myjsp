@@ -1,0 +1,10 @@
+package service;
+
+import domain.boardVO;
+
+public interface boardService 
+{
+
+	int edit(boardVO bvo);
+
+}

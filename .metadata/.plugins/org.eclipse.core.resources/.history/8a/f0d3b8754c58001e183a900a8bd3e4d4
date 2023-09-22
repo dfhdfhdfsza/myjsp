@@ -1,0 +1,73 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import service.boardService;
+import service.boardServiceImpl;
+
+
+@WebServlet("/brd")
+public class boardController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	//로그기록 객체 생성
+	private static final Logger log=LoggerFactory.getLogger(boardController.class);
+	
+	private RequestDispatcher rdp; //jsp에서 받은 요청을 처리,결과를 다른 jsp로 보내는 역할을 하는 객체
+	private String destPage; //목적지 주소 기록 변수
+	private int isOk; //DB의 구문 체크 값 저장
+	
+    private boardService bsv;   
+
+    public boardController() 
+    {
+       bsv= new boardServiceImpl();
+        
+    }
+
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String uri=request.getRequestURI();
+		String path=uri.substring(uri.lastIndexOf("/"));
+		
+		switch (path) 
+		{
+		case "register":
+			destPage="/board/register.jsp";
+			break;
+
+		
+		}
+		
+		rdp=request.getRequestDispatcher(destPage);
+		rdp.forward(request, response);
+		
+	}
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		service(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		service(request, response);
+	}
+
+}

@@ -1,0 +1,24 @@
+create table board (
+bno int auto_increment,
+title varchar(200) not null,
+writer varchar(100) not null,
+regdate datetime default now(),
+content text,
+category varchar(100),
+primary key(bno));
+---------------------------------------
+
+create table member(
+id varchar(100) not null,
+pw varchar(200) not null,
+regdate datetime default now(),
+last_login datetime default now(),	
+primary key(id));
+----------------------------------------
+create table comment(
+cno int auto_increment,
+bno int not null,
+writer varchar(200)not null,
+content varchar(300),
+regdate datetime,
+primary key(cno));

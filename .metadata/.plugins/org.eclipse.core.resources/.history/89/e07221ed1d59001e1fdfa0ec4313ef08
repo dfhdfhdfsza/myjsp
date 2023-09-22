@@ -1,0 +1,23 @@
+package handler;
+
+import domain.pagingVO;
+
+public class PagingHandler 
+{
+	private int startPage;
+	private int endPage;
+	private int realEndPage;
+	private boolean next,prev;
+	
+	private pagingVO pgvo;
+	
+	private int totalCount;
+	
+	public PagingHandler(pagingVO pgvo,int totalCount)
+	{
+		this.pgvo=pgvo;
+		this.totalCount=totalCount;
+	}
+	
+
+}

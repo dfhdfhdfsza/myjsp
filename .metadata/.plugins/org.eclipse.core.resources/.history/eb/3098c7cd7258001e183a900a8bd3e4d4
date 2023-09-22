@@ -1,0 +1,9 @@
+package dao;
+
+import domain.memberVO;
+
+public interface memberDAO {
+
+	int join(memberVO mvo);
+
+}
