@@ -1,0 +1,75 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/resources/comment.css">
+</head>
+<body>
+	<h1>Board Detail Page</h1>
+	<table border="1">
+		<tr>
+			<th>BNO</th>
+			<td>${bvo.bno}</td>
+		</tr>
+		<tr>
+			<th>TITLE</th>
+			<td>${bvo.title}</td>
+		</tr>
+		<tr>
+			<th>WRITER</th>
+			<td>${bvo.writer}</td>
+		</tr>
+		<tr>
+			<th>CONTENT</th>
+			<td>${bvo.content}</td>
+		</tr>
+		<tr>
+			<th>REGDATE</th>
+			<td>${bvo.regdate}</td>
+		</tr>
+		<tr>
+			<th>MODDATE</th>
+			<td>${bvo.moddate}</td>
+		</tr>
+	</table>
+	<a href="/brd/modify?bno=${bvo.bno}"><button type="button">수정</button></a>
+	<a href="/brd/remove?bno=${bvo.bno}"><button type="button">삭제</button></a>
+	
+	<div>
+		Comment Line<br>
+		<input type="text" id="cmtText" placeholder="Add Comment">
+		<button type="button" id="cmtAddBtn">댓글 등록</button>
+	</div>
+	<!-- 댓글 -->
+		<!-- Contenedor Principal -->
+	<div class="comments-container">
+		<h1>Comentarios <a href="http://creaticode.com">creaticode.com</a></h1>
+
+		<ul id="comments-list" class="comments-list">
+			<li>
+				<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+					<!-- Contenedor del Comentario -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+							<span>hace 20 minutos</span>
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+						</div>
+					</div>
+				</div>
+				<!-- Respuestas de los comentarios -->
+		</ul>
+	</div>
+	<!-- 댓글 -->
+	<br>
+</body>
+</html>

@@ -1,0 +1,9 @@
+package dao;
+
+import domain.commentVO;
+
+public interface commentDAO {
+
+	int post(commentVO cvo);
+
+}

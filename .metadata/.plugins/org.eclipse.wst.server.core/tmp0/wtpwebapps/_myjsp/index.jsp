@@ -6,63 +6,62 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/resources/login.css">
+<link rel="stylesheet" type="text/css" href="/resources/login2.css">
 </head>
 <body>
 	<h1>Index Page</h1>
 	<br>
 	<c:if test="${ses eq null }">
-		<form action="/mem/login">
-			<div class='box'>
-				<div class='box-form'>
-					<div class='box-login-tab'></div>
-					<div class='box-login-title'>
-						<div class='i i-login'></div>
-						<h2>LOGIN</h2>
+		<div class="container" id="container">
+			<div class="form-container sign-up-container">
+				<form action="/mem/join">
+					<h1>Create Account</h1>
+					<div class="social-container">
+						<a href="#" class="social"><i class="fab fa-facebook-f"></i></a> <a
+							href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+						<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 					</div>
-					<div class='box-login'>
-						<div class='fieldset-body' id='login_form'>
-							<button onclick="openLoginInfo();" class='b b-form i i-more'
-								title='Mais Informações'></button>
-							<p class='field'>
-								<label for='user'>ID</label> <input type='text' id='user'name='id' title='Username' /> 
-								<span id='valida' class='i i-warning'></span>
-							</p>
-							<p class='field'>
-								<label for='pass'>PASSWORD</label> <input type='password'
-									id='pass' name='pw' title='Password' /> <span id='valida'
-									class='i i-close'></span>
-							</p>
-
-							<label class='checkbox'> <input type='checkbox'
-								value='TRUE' title='Keep me Signed in' /> Keep me Signed in
-							</label> <input type='submit' id='do_login' value='GET STARTED'
-								title='Get Started' />
-						</div>
+					<span>or use your email for registration</span> 
+					<input type="text" placeholder="Email" name="id"/>
+					<input type="text" placeholder="Password" name="pw"/>
+					<button type="submit">Create Account</button>
+				</form>
+			</div>
+			<div class="form-container sign-in-container">
+				<form action="/mem/login" method="post">
+					<h1>Login</h1>
+					<div class="social-container">
+						<a href="#" class="social"><i class="fab fa-facebook-f"></i></a> <a
+							href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+						<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 					</div>
-				</div>
-				<div class='box-info'>
-					<p>
-						<button onclick="closeLoginInfo();" class='b b-info i i-left'
-							title='Back to Sign In'></button>
-					<h3>Need Help?</h3>
-					</p>
-					<div class='line-wh'></div>
-					<button onclick="" class='b-support' title='Forgot Password?'>
-						Forgot Password?</button>
-					<button onclick="" class='b-support' title='Contact Support'>
-						Contact Support</button>
-					<div class='line-wh'></div>
-					<button onclick="" class='b-cta' title='Sign up now!'>
-						CREATE ACCOUNT</button>
+					<span>or use your account</span> 
+					<input type="text"placeholder="ID" name="id"/> 
+					<input type="text" placeholder="Password" name="pw"/> 
+					<a href="#">Forgot your password?</a>
+					<button type="submit">Login</button>
+				</form>
+			</div>
+			<div class="overlay-container">
+				<div class="overlay">
+					<div class="overlay-panel overlay-left">
+						<h1>Welcome Back!</h1>
+						<p>To keep connected with us please login with your personal
+							info</p>
+						<button class="ghost" id="signIn">Sign In</button>
+					</div>
+					<div class="overlay-panel overlay-right">
+						<h1>Hello, Friend!</h1>
+						<p>Enter your personal details and start journey with us</p>
+						<button class="ghost" id="signUp">Sign Up</button>
+					</div>
 				</div>
 			</div>
-
-		</form>
+		</div>
 		<br>
 		<hr>
 	</c:if>
-
+	
 	<div>
 		<c:if test="${ses ne null}">
 			${ses.id}님 로그인 되었습니다. <br>
@@ -80,7 +79,7 @@
 	<hr>
 
 	<a href="/mem/register"><button>회원가입</button></a>
-	<a href="/mem/logout"><button>로그아웃</button></a>
+	<a href="/mem/logout"><button>로그아웃</button></a>	
 	<a href="/mem/list"><button>회원 리스트</button></a>
 	<a href="/mem/modify"><button>회원 정보 수정</button></a>
 
@@ -90,6 +89,9 @@
 	<a href="/brd/pageList">게시글 목록으로 이동...</a>
 	<br>
 
-	<script src="/resources/login.js"></script>
+	<script src="/resources/login2.js"></script>
+	<script type="text/javascript">
+		printCommentList(bnoVal);
+	</script>
 </body>
 </html>

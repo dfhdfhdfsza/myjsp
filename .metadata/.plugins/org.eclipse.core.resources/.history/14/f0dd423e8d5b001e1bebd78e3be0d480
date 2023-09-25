@@ -1,0 +1,27 @@
+package service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dao.commentDAO;
+import dao.commentDAOImpl;
+import domain.commentVO;
+
+public class commentServiceImpl implements commentService 
+{
+	private static final Logger log=LoggerFactory.getLogger(commentServiceImpl.class);
+	private commentDAO cdao;
+	
+	public commentServiceImpl()
+	{
+		cdao=new commentDAOImpl();
+	}
+
+	@Override
+	public int post(commentVO cvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+
+}

@@ -71,6 +71,7 @@ public class memberController extends HttpServlet {
 				log.info("login check 1");
 				String id=request.getParameter("id");
 				String pw= request.getParameter("pw");
+				log.info("id,pw:"+id+pw);
 				memberVO mvo=new memberVO(id, pw);
 				memberVO loginmvo=msv.login(mvo);
 				if(loginmvo!=null)
@@ -92,6 +93,7 @@ public class memberController extends HttpServlet {
 			try {
 				HttpSession ses=request.getSession();
 				memberVO mvo=(memberVO)ses.getAttribute("ses");
+				log.info("mvo:"+mvo);
 				String id=mvo.getId();
 				isOk=msv.logout(id);
 				ses.invalidate();

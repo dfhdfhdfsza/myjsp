@@ -1,0 +1,143 @@
+package controller;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import domain.commentVO;
+import service.commentService;
+import service.commentServiceImpl;
+
+
+@WebServlet("/cmt/*")
+public class commentController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    private static final Logger log=LoggerFactory.getLogger(commentController.class);
+    
+    private commentService csv;
+    private int isOk;
+   
+    public commentController() 
+    {
+        csv=new commentServiceImpl();
+    }
+
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		//setContentType 필요x
+		String uri=request.getRequestURI();
+		// /brd/detail?bno=1; =>동기방식 주소체계
+		//동기방식 => get.post
+		// /cmt/list/10 => RestAPI 방식
+		String pathuri=uri.substring("/cmt/".length());// post/10
+		String path=pathuri; //switch분기문에서 사용할 path변수
+		String pathVar=""; //없으면 공백처리
+		if(pathuri.contains("/")) //만약 값을 달고 왔다면(post/10) path와 값을 분리
+		{
+			path=pathuri.substring(0,pathuri.lastIndexOf("/")); //post
+			pathVar=pathuri.substring(pathuri.lastIndexOf("/")+1);
+		}
+		switch (path) 
+		{
+		case "post":
+			try {
+				//JSON 방식으로 화면에서 보낸 데이터를 받을 준비
+				//String 형태로 값을 받아서 객체로 변환 JSON
+				//json-simple-1.1.1 라이브러리를 사용하여
+				//JSON 형태의 스트링을 객체 형태로 변환
+				//'{bno:1, ...}'
+				StringBuffer sb= new StringBuffer();
+				String line="";
+				BufferedReader br=request.getReader();//cmtData를 받아오는 객체
+				//BufferedReader를 쓰는 이유? 객체를 읽어올려면 getreader로
+				while((line=br.readLine())!=null)
+				{
+					sb.append(line);
+				}
+//				입력 스트림에서 한 줄씩 데이터를 읽어옵니다.
+//				읽은 데이터가 null이 아닐 때까지 반복합니다.
+//				각 줄(line)을 sb.append(line)을 사용하여 이전에 저장된 내용과 결합시킵니다. 
+//				따라서, 모든 줄의 내용이 순차적으로 합쳐져 최종적으로 하나의 큰 문자열이 됩니다.
+//				즉, 주어진 코드는 HTTP 요청으로부터 전송된 데이터(여러 줄로 구성될 수 있음)를 한 줄씩 읽어와서 모두 합친 후,
+//				그 결과인 하나의 큰 문자열을 StringBuffer인 sb에 저장하는 것입니다.
+				//객체로 변환
+				JSONParser parser=new JSONParser(); //json형태로 변환해줄 클래스
+				//parser로 변환했는데(JSONObject)을 붙이는 이유?	parser.parse(sb.toString())->결과가 object
+				JSONObject jsonobj=(JSONObject)parser.parse(sb.toString());
+				//CommentVO 형태로 변환
+				int bno=Integer.parseInt(jsonobj.get("bno").toString());
+				String writer=jsonobj.get("writer").toString();
+				String content=jsonobj.get("content").toString();
+			
+				//csv DB로 저장
+				commentVO cvo=new commentVO(bno, writer, content);
+				isOk=csv.post(cvo);
+			
+				PrintWriter out=response.getWriter();
+				out.print(isOk);
+			} catch (Exception e) {
+				log.info(">>Comment > post > error");
+				e.printStackTrace();
+			}
+			break;
+		case "list":
+			try {
+				log.info("list check 1")
+				int bno=Integer.parseInt(pathVar);
+				List<commentVO>list=csv.getList(bno);
+				log.info("comment > list > "+list);
+				//json형태로 변환 -> 화면에 전송
+				JSONObject[] jsonObjArr=new JSONObject[list.size()];
+				
+				JSONArray jsonList=new JSONArray();
+				for(int i=0;i<list.size();i++)
+				{
+					jsonObjArr[i]=new JSONObject();
+					jsonObjArr[i].put("cno",list.get(i).getCno());
+					jsonObjArr[i].put("bno",list.get(i).getBno());
+					jsonObjArr[i].put("writer",list.get(i).getWriter());
+					jsonObjArr[i].put("content",list.get(i).getContent());
+					jsonObjArr[i].put("regdate",list.get(i).getRegdate());
+					jsonList.add(jsonObjArr[i]);
+				}
+				String jsonData=jsonList.toJSONString(); //전송용
+				
+				//전송 객체에 싣고 jsp로 전송
+				PrintWriter out=response.getWriter(); 
+				out.print(jsonData);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
+		}//switch end
+	}//service end
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		service(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		service(request, response);
+	}
+
+}

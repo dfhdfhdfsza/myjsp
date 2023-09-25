@@ -1,0 +1,19 @@
+package service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dao.commentDAO;
+import dao.commentDAOImpl;
+
+public class commentServiceImpl implements commentService 
+{
+	private static final Logger log=LoggerFactory.getLogger(commentServiceImpl.class);
+	private commentDAO cdao;
+	
+	public commentServiceImpl()
+	{
+		cdao=new commentDAOImpl();
+	}
+
+}

@@ -10,6 +10,22 @@ public class commentVO
 
 	
 	public commentVO() {}
+	
+	//post
+	public commentVO(int bno, String writer, String content) {
+		super();
+		this.bno = bno;
+		this.writer = writer;
+		this.content = content;
+	}
+
+	//modify
+	public commentVO(int cno, String content) {
+		super();
+		this.cno = cno;
+		this.content = content;
+	}
+
 	//---------------------------------getter/setter------------------------------
 	
 	public int getCno() {
